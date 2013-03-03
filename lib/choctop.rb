@@ -127,10 +127,11 @@ module ChocTop
     # The remote directory where the xml + dmg files will be uploaded
     attr_accessor :remote_dir
   
-    # Defines the transport to use for upload, default is :rsync, :scp is also available
+    # Defines the transport to use for upload, default is :rsync, :scp and :s3 is also available
     attr_accessor :transport
     def transport
-      @transport ||= :rsync # other option is scp
+      @transport ||= :rsync
+      @transport ||= :s3
     end
   
     # The argument flags passed to rsync
@@ -140,6 +141,9 @@ module ChocTop
     # Additional arguments to pass to scp
     # e.g. -P 11222
     attr_accessor :scp_args
+    
+    #the name of the s3 bucket
+    attr_accessor :s3_bucket
 
     attr_accessor :build_products
     def build_products

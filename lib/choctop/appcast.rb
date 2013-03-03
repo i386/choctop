@@ -96,6 +96,8 @@ module ChocTop
       when :scp
         # this is whack, really, work out your rsync options
         sh %{scp #{scp_args} #{build_path}/* #{_user}#{_host}:#{remote_dir}}
+      when :s3
+        sh %{s3cmd put #{build_path}/* s3://#{s3_bucket}/#{remote_dir}}
       else # default to rsync as per original
         sh %{rsync #{rsync_args} #{build_path}/ #{_user}#{_host}:#{remote_dir}}
       end
